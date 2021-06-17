@@ -298,7 +298,7 @@ namespace sampleTcpUdpServer2
                 try
                 {
                     localHostEntry = Dns.GetHostByName(Dns.GetHostName());
-                    Console.WriteLine("Hostname:" + Dns.GetHostName() + " Port: " + sampleUdpPort);
+                    Console.WriteLine("Hostname:" + localHostEntry.AddressList[0] + " Port:" + sampleUdpPort);
                 }
                 catch (Exception)
                 {
