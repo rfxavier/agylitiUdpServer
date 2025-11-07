@@ -341,15 +341,18 @@ namespace sampleTcpUdpServer2
                 {
                     try
                     {
-                        Byte[] received = new Byte[256];
+                        Byte[] received = new Byte[1024];
                         IPEndPoint tmpIpEndPoint = new IPEndPoint(localHostEntry.AddressList[0], sampleUdpPort);
 
                         EndPoint remoteEP = (tmpIpEndPoint);
 
                         int bytesReceived = soUdp.ReceiveFrom(received, ref remoteEP);
 
-                        String dataReceived = System.Text.Encoding.ASCII.GetString(received);
+                        var remote = (IPEndPoint)remoteEP;
+                        //Console.WriteLine($"Received {bytesReceived} bytes from {remote.Address}:{remote.Port}");
 
+                        String dataReceived = System.Text.Encoding.ASCII.GetString(received, 0, bytesReceived);
+                        //Console.WriteLine($"Received from {remote.Address}:{remote.Port}: {dataReceived}");
 
                         var parsedDataReceivedArray = dataReceived.Split(';');
 
